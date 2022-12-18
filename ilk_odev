@@ -1,0 +1,224 @@
+x = eval(input())
+v0 , v1 , v2 , v3 = x
+v0x , v0y = v0
+v1x , v1y = v1
+v2x , v2y = v2
+v3x , v3y = v3
+ycoordinates = [v0y , v1y , v2y , v3y]
+xcoordinates = [v0x , v1x , v2x , v3x]
+flip = 0
+
+if v0y<=0 and v1y<=0 and v2y<=0 and v3y<=0:
+    v0y = abs(v0y)
+    v1y = abs(v1y)
+    v2y = abs(v2y)
+    v3y = abs(v3y)
+    flip = 1
+
+if v0x<=0 or v1x<=0 or v2x<=0 or v3x<=0:
+    v0x = v0x + abs(min(xcoordinates)) + 10
+    v1x = v1x + abs(min(xcoordinates)) + 10
+    v2x = v2x + abs(min(xcoordinates)) + 10
+    v3x = v3x + abs(min(xcoordinates)) + 10
+
+f0x = 0
+f0y = 0
+f1x = 0
+f1y = 0
+f2x = 0
+f2y = 0
+f3x = 0
+f3y = 0
+
+ycoordinates = [v0y , v1y , v2y , v3y]
+xcoordinates = [v0x , v1x , v2x , v3x]
+
+minXs = [0, 0, 0, 0]
+minYs = [0, 0, 0, 0]
+if min(xcoordinates) == v0x:
+    minXs[0] = 1
+if min(xcoordinates) == v1x:
+    minXs[1] = 1
+if min(xcoordinates) == v2x:
+    minXs[2] = 1
+if min(xcoordinates) == v3x:
+    minXs[3] = 1
+
+if(minXs[0] == 1):
+    if(minXs[1] == 1):
+        if v0y < v1y:
+            minYs[0] = 1
+        else:
+            minYs[1] = 1
+            
+    elif(minXs[2] == 1):
+        if v0y < v2y:
+            minYs[0] = 1
+        else:
+            minYs[2] = 1
+            
+    elif(minXs[3] == 1):
+        if v0y < v3y:
+            minYs[0] = 1
+        else:
+            minYs[3] = 1
+    else:
+        minYs[0] = 1
+
+elif(minXs[1] == 1):
+    if(minXs[2] == 1):
+        if v1y < v2y:
+            minYs[1] = 1
+        else:
+            minYs[2] = 1
+            
+    elif(minXs[3] == 1):
+        if v1y < v3y:
+            minYs[1] = 1
+        else:
+            minYs[3] = 1
+    else:
+        minYs[1] = 1
+
+elif(minXs[2] == 1):
+    if(minXs[3] == 1):
+        if v2y < v3y:
+            minYs[2] = 1
+        else:
+            minYs[3] = 1
+    else:
+        minYs[2] = 1
+
+else:
+    minYs[3] = 1
+    
+if minYs[0] == 1 :
+    f0x = v0x
+    f0y = v0y
+    f1x = v1x
+    f1y = v1y
+    f2x = v2x
+    f2y = v2y
+    f3x = v3x
+    f3y = v3y
+
+if minYs[1] == 1 :
+    f0x = v1x
+    f0y = v1y
+    f1x = v2x
+    f1y = v2y
+    f2x = v3x
+    f2y = v3y
+    f3x = v0x
+    f3y = v0y
+
+if minYs[2] == 1 :
+    f0x = v2x
+    f0y = v2y
+    f1x = v3x
+    f1y = v3y
+    f2x = v0x
+    f2y = v0y
+    f3x = v1x
+    f3y = v1y
+
+if minYs[3] == 1 :
+    f0x = v3x
+    f0y = v3y
+    f1x = v0x
+    f1y = v0y
+    f2x = v1x
+    f2y = v1y
+    f3x = v2x
+    f3y = v2y
+
+xcoordinatesf = [f0x , f1x , f2x , f3x]
+ycoordinatesf = [f0y , f1y , f2y , f3y]
+
+if flip == 0 :
+
+    if max(xcoordinatesf) == f3x :
+
+        area = (f3x - f0x)*((f3y + f0y)/2)
+
+    elif max(xcoordinatesf) == f1x :
+
+        area_big = (f1x - f0x)*((f1y + f0y)/2)
+
+        if f2y >= f3y :
+
+            side1 = (((f1y - f0y)**2 + (f1x - f0x)**2))**(1/2)
+            side2 = (((f2y - f1y)**2 + (f2x - f1x)**2))**(1/2)
+            side3 = (((f3y - f2y)**2 + (f3x - f2x)**2))**(1/2)
+            side4 = (((f0y - f3y)**2 + (f0x - f3x)**2))**(1/2)
+            side5 = (((f2y - f0y)**2 + (f2x - f0x)**2))**(1/2)
+
+            semi_perimeter1 = (side1 + side2 + side5)/2
+            semi_perimeter2 = (side3 + side4 + side5)/2
+            
+            area_small1 = ((semi_perimeter1)*(semi_perimeter1 - side1)*(semi_perimeter1 - side2)*(semi_perimeter1 - side5))**(1/2)
+            area_small2 = ((semi_perimeter2)*(semi_perimeter2 - side3)*(semi_perimeter2 - side4)*(semi_perimeter2 - side5))**(1/2)
+        
+        elif f3y > f2y :
+
+            side1 = (((f1y - f0y)**2 + (f1x - f0x)**2))**(1/2)
+            side2 = (((f2y - f1y)**2 + (f2x - f1x)**2))**(1/2)
+            side3 = (((f3y - f2y)**2 + (f3x - f2x)**2))**(1/2)
+            side4 = (((f0y - f3y)**2 + (f0x - f3x)**2))**(1/2)
+            side5 = (((f3y - f1y)**2 + (f3x - f1x)**2))**(1/2)
+
+            semi_perimeter1 = (side1 + side4 + side5)/2
+            semi_perimeter2 = (side2 + side3 + side5)/2
+            area_small1 = ((semi_perimeter1)*(semi_perimeter1 - side1)*(semi_perimeter1 - side4)*(semi_perimeter1 - side5))**(1/2)
+            area_small2 = ((semi_perimeter2)*(semi_perimeter2 - side2)*(semi_perimeter2 - side3)*(semi_perimeter2 - side5))**(1/2)
+
+        area_small = area_small1 + area_small2
+        area = area_big - area_small
+        
+    elif max(xcoordinatesf) == f2x :
+        area = (f3x - f0x)*((f3y + f0y)/2) + (f2x - f3x)*((f2y + f3y)/2)
+
+elif flip == 1 :
+
+    if max(xcoordinatesf) == f1x :
+
+        area = (f1x - f0x)*((f1y + f0y)/2)
+
+    elif max(xcoordinatesf) == f3x :
+        
+        area_big = (f3x - f0x)*((f3y + f0y)/2)
+
+        if f2y >= f1y :
+
+            side1 = (((f3y - f0y)**2 + (f3x - f0x)**2))**(1/2)
+            side2 = (((f2y - f3y)**2 + (f2x - f3x)**2))**(1/2)
+            side3 = (((f1y - f2y)**2 + (f1x - f2x)**2))**(1/2)
+            side4 = (((f0y - f1y)**2 + (f0x - f1x)**2))**(1/2)
+            side5 = (((f2y - f0y)**2 + (f2x - f0x)**2))**(1/2)
+
+            semi_perimeter1 = (side1 + side2 + side5)/2
+            semi_perimeter2 = (side3 + side4 + side5)/2
+            
+            area_small1 = ((semi_perimeter1)*(semi_perimeter1 - side1)*(semi_perimeter1 - side2)*(semi_perimeter1 - side5))**(1/2)
+            area_small2 = ((semi_perimeter2)*(semi_perimeter2 - side3)*(semi_perimeter2 - side4)*(semi_perimeter2 - side5))**(1/2)
+        
+        elif f2y < f1y :
+
+            side1 = (((f3y - f0y)**2 + (f3x - f0x)**2))**(1/2)
+            side2 = (((f2y - f3y)**2 + (f2x - f3x)**2))**(1/2)
+            side3 = (((f1y - f2y)**2 + (f1x - f2x)**2))**(1/2)
+            side4 = (((f0y - f1y)**2 + (f0x - f1x)**2))**(1/2)
+            side5 = (((f3y - f1y)**2 + (f3x - f1x)**2))**(1/2)
+
+            semi_perimeter1 = (side1 + side4 + side5)/2
+            semi_perimeter2 = (side2 + side3 + side5)/2
+            area_small1 = ((semi_perimeter1)*(semi_perimeter1 - side1)*(semi_perimeter1 - side4)*(semi_perimeter1 - side5))**(1/2)
+            area_small2 = ((semi_perimeter2)*(semi_perimeter2 - side2)*(semi_perimeter2 - side3)*(semi_perimeter2 - side5))**(1/2)
+
+        area_small = area_small1 + area_small2
+        area = area_big - area_small
+        
+    elif max(xcoordinatesf) == f2x :
+        area = (f1x - f0x)*((f1y + f0y)/2) + (f2x - f1x)*((f2y + f1y)/2)
+
+print("%.2f" % area)

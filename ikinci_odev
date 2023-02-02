@@ -1,0 +1,550 @@
+possiblecells = ['T', 'T', 'T', 'T', 'T', 'M', 'M', 'M', 'M', 'M', 'S', 'S', 'P', 'P', 'P', 'V', 'V', 'V', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E']
+
+adventureland = [[' ', ' ', ' ', ' ', ' ', ' ', ' '],[' ', ' ', ' ', ' ', ' ', ' ', ' '],[' ', ' ', ' ', ' ', ' ', ' ', ' '],[' ', ' ', ' ', ' ', ' ', ' ', ' '],[' ', ' ', ' ', ' ', ' ', ' ', ' '],[' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+    
+import random
+import os
+firstwidth = random.choice(range(6))
+firstlenghth = random.choice(range(7))
+adventureland[firstwidth][firstlenghth] = 'E'
+possiblecells.remove('E')
+bool1 = True
+for i in range(len(adventureland)):
+    print(adventureland[i], end='\n')
+score = 0
+sword = 0
+potion = 0
+while bool1 == True:
+    print('', end='\n')
+    move = input("Press L, U, R, D to move:")
+    
+
+    
+
+
+    if move == 'L' or move == 'l':
+        outputpossiblecells = random.choice(possiblecells)
+        if firstlenghth-1>=0:
+            if adventureland[firstwidth][firstlenghth-1] == ' ':
+                adventureland[firstwidth][firstlenghth-1] = outputpossiblecells
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('This land has already been discovered! Try a different direction')
+                print('', end='\n')
+                continue
+        else:
+            os.system('cls')
+            for i in range(len(adventureland)):
+                print(adventureland[i], end='\n')
+            print('', end='\n')
+            print('Cannot move left! Try again')
+            print('', end='\n')
+            continue
+        firstlenghth = firstlenghth-1
+        if outputpossiblecells == 'T':
+            score = score+1
+            possiblecells.remove('T')
+        if outputpossiblecells == 'M':
+            possiblecells.remove('M')
+            if sword == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('SWORD is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                sword = sword-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'S':
+            sword = sword+1
+            possiblecells.remove('S')
+        if outputpossiblecells == 'P':
+            potion = potion+1
+            possiblecells.remove('P')
+        if outputpossiblecells == 'V':
+            possiblecells.remove('V')
+            if potion == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('POTION is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                potion = potion-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'E':
+            possiblecells.remove('E')
+        os.system('cls')
+        for i in range(len(adventureland)):
+            print(adventureland[i], end='\n')
+        score = score+1
+        if outputpossiblecells == 'S':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+SWORD', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        if outputpossiblecells == 'P':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+POTION', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+        if outputpossiblecells == 'T':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+TREASURE', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        print('', end='\n')
+        print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+        continue
+    
+    
+
+
+    
+    if move == 'U' or move == 'u':
+        outputpossiblecells = random.choice(possiblecells)
+        if firstwidth-1>=0:
+            if adventureland[firstwidth-1][firstlenghth] == ' ':
+                adventureland[firstwidth-1][firstlenghth] = outputpossiblecells
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('This land has already been discovered! Try a different direction')
+                print('', end='\n')
+                continue
+        else:
+            os.system('cls')
+            for i in range(len(adventureland)):
+                print(adventureland[i], end='\n')
+            print('', end='\n')
+            print('Cannot move up! Try again')
+            print('', end='\n')
+            continue
+        firstwidth = firstwidth-1
+        if outputpossiblecells == 'T':
+            score = score+1
+            possiblecells.remove('T')
+        if outputpossiblecells == 'M':
+            possiblecells.remove('M')
+            if sword == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('SWORD is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                sword = sword-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'S':
+            sword = sword+1
+            possiblecells.remove('S')
+        if outputpossiblecells == 'P':
+            potion = potion+1
+            possiblecells.remove('P')
+        if outputpossiblecells == 'V':
+            possiblecells.remove('V')
+            if potion == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('POTION is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                potion = potion-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'E':
+            possiblecells.remove('E')
+        os.system('cls')
+        for i in range(len(adventureland)):
+            print(adventureland[i], end='\n')
+        score = score+1
+        if outputpossiblecells == 'S':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+SWORD', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        if outputpossiblecells == 'P':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+POTION', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+        if outputpossiblecells == 'T':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+TREASURE', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        print('', end='\n')
+        print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+        continue
+        
+    
+
+
+
+    if move == 'R' or move == 'r':
+        outputpossiblecells = random.choice(possiblecells)
+        if firstlenghth+1<=6:
+            if adventureland[firstwidth][firstlenghth+1] == ' ':
+                adventureland[firstwidth][firstlenghth+1] = outputpossiblecells
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('This land has already been discovered! Try a different direction')
+                print('', end='\n')
+                continue
+        else:
+            os.system('cls')
+            for i in range(len(adventureland)):
+                print(adventureland[i], end='\n')
+            print('', end='\n')
+            print('Cannot move right! Try again')
+            print('', end='\n')
+            continue
+        firstlenghth = firstlenghth+1
+        if outputpossiblecells == 'T':
+            score = score+1
+            possiblecells.remove('T')
+        if outputpossiblecells == 'M':
+            possiblecells.remove('M')
+            if sword == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('SWORD is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                sword = sword-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'S':
+            sword = sword+1
+            possiblecells.remove('S')
+        if outputpossiblecells == 'P':
+            potion = potion+1
+            possiblecells.remove('P')
+        if outputpossiblecells == 'V':
+            possiblecells.remove('V')
+            if potion == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('POTION is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                potion = potion-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'E':
+            possiblecells.remove('E')
+        os.system('cls')
+        for i in range(len(adventureland)):
+            print(adventureland[i], end='\n')
+        score = score+1
+        if outputpossiblecells == 'S':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+SWORD', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        if outputpossiblecells == 'P':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+POTION', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+        if outputpossiblecells == 'T':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+TREASURE', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        print('', end='\n')
+        print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+        continue
+       
+    
+
+
+    
+    if move == 'D' or move == 'd':
+        outputpossiblecells = random.choice(possiblecells)
+        if firstwidth+1<=5:
+            if adventureland[firstwidth+1][firstlenghth] == ' ':
+                adventureland[firstwidth+1][firstlenghth] = outputpossiblecells
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('This land has already been discovered! Try a different direction')
+                print('', end='\n')
+                continue
+        else:
+            os.system('cls')
+            for i in range(len(adventureland)):
+                print(adventureland[i], end='\n')
+            print('', end='\n')
+            print('Cannot move down! Try again')
+            print('', end='\n')
+            continue
+        firstwidth = firstwidth+1
+        if outputpossiblecells == 'T':
+            score = score+1
+            possiblecells.remove('T')
+        if outputpossiblecells == 'M':
+            possiblecells.remove('M')
+            if sword == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! MONSTER', end='\n')
+                print('SWORD is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                sword = sword-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'S':
+            sword = sword+1
+            possiblecells.remove('S')
+        if outputpossiblecells == 'P':
+            potion = potion+1
+            possiblecells.remove('P')
+        if outputpossiblecells == 'V':
+            possiblecells.remove('V')
+            if potion == 0:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('You die.', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                break
+            else:
+                os.system('cls')
+                for i in range(len(adventureland)):
+                    print(adventureland[i], end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                print('Oh no! VENOM', end='\n')
+                print('POTION is used', end='\n')
+                print('', end='\n')
+                print('-----------------------------', end='\n')
+                print('', end='\n')
+                potion = potion-1
+                score = score+1
+                print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+                continue
+        if outputpossiblecells == 'E':
+            possiblecells.remove('E')
+        os.system('cls')
+        for i in range(len(adventureland)):
+            print(adventureland[i], end='\n')
+        score = score+1
+        if outputpossiblecells == 'S':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+SWORD', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        if outputpossiblecells == 'P':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+POTION', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        if outputpossiblecells == 'T':
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+            print('', end='\n')
+            print('+TREASURE', end='\n')
+            print('', end='\n')
+            print('-----------------------------', end='\n')
+        print('', end='\n')
+        print('Score: [', score, '] ', 'Sword: [', sword, '] ', 'Potion: [', potion, ']' )
+        continue
